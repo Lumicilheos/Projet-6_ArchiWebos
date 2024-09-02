@@ -14,7 +14,7 @@ document.getElementById("projet").addEventListener("click", function () {
 // });
 
 document.querySelector("#formLogin").addEventListener("submit", function (event) {
-  event.preventDefault(); // Empêche le rechargement de la page
+  event.preventDefault();
 
   // valeurs USER
   let email = document.querySelector("#email").value;

@@ -37,7 +37,7 @@ const switchModal2 = function (event) {
 const switchBack = function (event) {
   event.preventDefault();
   closeModal(event);
-  openModal(event, document.querySelector("#modal1"));
+  openModal(event, (document.querySelector("#modal1").style.display = null));
 };
 
 document.querySelector(".js-modal-switch").addEventListener("click", switchModal2);
