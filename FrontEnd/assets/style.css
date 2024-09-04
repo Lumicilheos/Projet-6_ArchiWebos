@@ -342,11 +342,27 @@ section.login {
 /* - Faire l'appel à l'API ( POST sur la route du login ) pour récupérer le token */
 /* TEST MODAL  */
 
+/* test h2 */
+
+.modal-title {
+  display: flex;
+  justify-content: center;
+}
+
+.js-modal {
+  color: black;
+  text-decoration: none;
+}
+
+.js-modal i {
+  margin: 10px;
+  margin-left: 30px;
+}
+
 .modal {
   position: fixed;
   display: flex;
   /* REMETTRE LE DISPLAY TEST */
-
   align-items: center;
   justify-content: center;
   top: 0;
@@ -357,23 +373,50 @@ section.login {
 }
 
 .modal-wrapper {
-  overflow: auto;
   background-color: white;
   width: 630px;
-  height: 550px;
-  padding: 20px;
+  padding: 20px 100px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.js-modal-close {
+.js-modal-close,
+.js-modal-back {
   align-self: end;
+  /* position: relative;
+  left: 55px;
+  top: 30px; */
   font-size: 22px;
   background-color: white;
   border: none;
 }
 
+.js-modal-back {
+  align-self: start;
+  position: relative;
+  top: 30px;
+  /* VERIFIER la position */
+}
+
 .modal-wrapper input {
   padding: 10px 25px;
+}
+
+.gallery-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.gallery-modal img {
+  width: 100%;
+}
+
+.gallery-modal i {
+  position: relative;
+  left: 75%;
+  bottom: 80%;
+  padding: 5px;
+  color: white;
+  background-color: black;
 }

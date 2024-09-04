@@ -1,6 +1,7 @@
 // URL de l'API
 const apiCategoriesUrl = "http://localhost:5678/api/categories";
 const apiWorksUrl = "http://localhost:5678/api/works";
+const apiWorkDelete = "http://localhost:5678/api/works/${workId}";
 
 const token = localStorage.getItem("token");
 
@@ -95,6 +96,8 @@ async function getWorks() {
 function initializeUI(categories, works) {
   createFilterButtons(categories); // Crée les boutons de filtre avec les catégories
   displayWorks(works); // Affiche les projets
+  displayWorksModal(works);
+  // test modal init *****************
 }
 
 // INITIALIZE
@@ -126,9 +129,31 @@ function displayWorks(works) {
   });
 }
 
+// CHEK LOGIN
+function checkLoginStatus() {
+  const loginButton = document.querySelector("#loginButton");
+  const token = localStorage.getItem("token");
+  if (token) {
+    // L'utilisateur est connecté
+    loginButton.textContent = "Logout";
+
+    // Ajouter l'événement de déconnexion
+    loginButton.addEventListener("click", function () {
+      // Supprimer le token du localStorage
+      localStorage.removeItem("token");
+    });
+  } else {
+    // L'utilisateur n'est pas connecté
+    loginButton.textContent = "Login";
+  }
+}
+
+// Appeler la fonction pour vérifier l'état de connexion au chargement de la page
+checkLoginStatus();
+
 // Exécute la fonction initialize une fois que le DOM est complètement chargé
 document.addEventListener("DOMContentLoaded", initialize);
-checkLoginStatus();
+
 // appl pourt check le token
 
 // A VOIR VERIFICATION PRESENCE BUTTON POUR INDEX !!!!!!!
