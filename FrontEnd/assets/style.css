@@ -344,6 +344,8 @@ section.login {
 
 /* test h2 */
 
+/* MODAL */
+
 .modal-title {
   display: flex;
   justify-content: center;
@@ -419,4 +421,44 @@ section.login {
   padding: 5px;
   color: white;
   background-color: black;
+}
+
+/* MODAL2 */
+
+.modalProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  background-color: #e8f1f6;
+  height: 200px;
+  width: 420px;
+}
+
+.modalProject i {
+  font-size: 70px;
+  color: #b9c5cc;
+  padding-top: 20px;
+}
+
+.modalProject p {
+  padding-top: 10px;
+}
+
+.modalProject button {
+  display: flex;
+  z-index: 0;
+  justify-content: center;
+}
+
+.modalProject input {
+  height: 36px;
+  opacity: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.btn-text {
+  z-index: 0;
+  position: absolute;
 }

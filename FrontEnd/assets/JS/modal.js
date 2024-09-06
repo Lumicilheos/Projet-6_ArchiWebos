@@ -74,8 +74,9 @@ function displayWorksModal(works) {
   });
 }
 
+// DELETE
 async function deleteWork(workId) {
-  const response = await fetch("http://localhost:5678/api/works/${workId}", {
+  const response = await fetch(apiWorkDelete, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -89,8 +90,31 @@ async function deleteWork(workId) {
   }
 }
 
-// document.querySelector(".js-modal").addEventListener("click", async () => {
-//   const works = await fetchWorks();
-//   displayWorksModal(works);
-// });
-// MARCHE MAIS EN IMMENSE
+// TEST POST WORK
+
+async function postWork() {
+  const form = document.getElementById("newProject");
+  const formData = new FormData(form);
+  const imageFile = document.querySelector('input[type="file"]').files[0];
+
+  formData.append("image", imageFile);
+
+  try {
+    const response = await fetch(apiworkpost, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log(`Work posted successfully:`, responseData);
+    } else {
+      console.error("Failed to post work:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
