@@ -5,6 +5,7 @@ const apiWorkDelete = "http://localhost:5678/api/works/${workId}";
 const apiworkpost = "http://localhost:5678/api/users/login";
 
 const token = localStorage.getItem("token");
+const userId = localStorage.getItem("userId");
 
 // REDIRECTION
 
@@ -20,7 +21,7 @@ document.getElementById("loginButton").addEventListener("click", function () {
 
 // RECUPERATION
 
-// Fonction pour récupérer les données des catégories
+//catégories
 async function fetchCategories() {
   try {
     const response = await fetch(apiCategoriesUrl); // Appel API pour les categorties
@@ -33,7 +34,7 @@ async function fetchCategories() {
   }
 }
 
-// Fonction pour récupérer les projets
+// projets
 async function fetchWorks() {
   try {
     const response = await fetch(apiWorksUrl); // Appel api projet

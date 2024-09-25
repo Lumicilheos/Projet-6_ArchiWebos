@@ -62,26 +62,28 @@
 					<button class="js-modal-back"><i class="fa-solid fa-arrow-left"></i></button>
 					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
 					<h2>Ajout photo</h2>
-					<div class="modalProject">
-						<i class="fa-regular fa-image "></i>
-						<form id="newProject">
+					<form id="newProject" enctype="multipart/form-data" method="post">
+						<div class="modalProject">
+							<i class="fa-regular fa-image "></i>
 							<button>
-								<input type="file">
+								<input type="file" name="imageFile" required>
+								<!-- PREVIEW -->
 								<img id="preview" style="display: none;"></img>
 								<p class="btn-text">+ Ajouter photo</p>
 							</button>
 							<p>jpg, png : 4mo max</p>
-					</div>
-					<input type="text">
-					<!-- TEST	 -->
+						</div>
+						<input type="text" name="title">
+						<!-- TEST	 -->
 
-					<select id="categories">
-						<option value="categorie1">Objet</option>
-						<option value="categorie2">Appartement</option>
-						<option value="categorie3">Hotel & restaurants</option>
-					</select>
+						<select id="categories" name="categoryId">
+							<!-- METTRE PLUTOIT ID CATEGORIE -->
+							<option value="1">Objet</option>
+							<option value="2">Appartement</option>
+							<option value="3">Hotel & restaurants</option>
+						</select>
+						<input type="submit" value="Valider" id="submitProject">
 					</form>
-					<input type="submit" value="Valider">
 
 				</div>
 			</aside>

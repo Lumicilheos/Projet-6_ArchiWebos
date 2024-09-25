@@ -38,6 +38,7 @@ document.querySelector("#formLogin").addEventListener("submit", function (event)
           let responseUser = await response.json();
 
           localStorage.setItem("token", responseUser.token);
+          localStorage.setItem("userId", responseUser.userId);
           checkLoginStatus();
           // METTRE UN CLEAN OK token ok ? ?
           document.querySelector("#formLogin").innerHTML = "";

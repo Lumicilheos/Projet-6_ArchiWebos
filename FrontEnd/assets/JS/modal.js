@@ -74,7 +74,6 @@ function displayWorksModal(works) {
   });
 }
 
-// DELETE
 async function deleteWork(workId) {
   const response = await fetch(apiWorkDelete, {
     method: "DELETE",
@@ -85,6 +84,8 @@ async function deleteWork(workId) {
   });
   if (response.ok) {
     console.log(`Work with ID ${workId} deleted successfully`);
+    const updateDeleteWork = await fetchWorks();
+    displayWorksModal(updateDeleteWork);
   } else {
     console.error("Failed to delete work:", response.statusText);
   }
@@ -92,29 +93,65 @@ async function deleteWork(workId) {
 
 // TEST POST WORK
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Ouvre la modal et attache l'événement de soumission du formulaire
+  document.querySelector(".js-modal-switch").addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = document.querySelector("#modal2");
+    modal.style.display = "block"; // Rendre la modal visible
+
+    // Attacher l'événement 'submit' au formulaire seulement une fois la modal visible
+    const form = document.getElementById("newProject");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Empêche la soumission par défaut
+      postWork(); // Appelle postWork quand le formulaire est soumis
+    });
+  });
+});
+
 async function postWork() {
   const form = document.getElementById("newProject");
-  const formData = new FormData(form);
-  const imageFile = document.querySelector('input[type="file"]').files[0];
 
-  formData.append("image", imageFile);
+  // Vérifier si le formulaire et les champs existent avant de les utiliser
+  if (!form) {
+    console.error("Le formulaire n'existe pas.");
+    return;
+  }
+
+  const formData = new FormData(form);
+  const imageFile = form.querySelector('input[type="file"]').files[0];
+  const titleInput = form.querySelector("input[type='text']");
+  const categorySelect = form.querySelector("select");
+
+  // Vérification de la présence des éléments
+  if (!imageFile || !titleInput || !categorySelect) {
+    console.error("Tous les champs ne sont pas remplis.");
+    return;
+  }
+
+  formData.append("title", titleInput.value);
+  formData.append("imageUrl", imageFile);
+  formData.append("categoryId", categorySelect.value);
+  formData.append("userId", userId);
+  console.log(categorySelect.value);
 
   try {
-    const response = await fetch(apiworkpost, {
+    const response = await fetch(apiWorksUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`, // Ajouter le token
       },
       body: formData,
     });
 
     if (response.ok) {
-      const responseData = await response.json();
-      console.log(`Work posted successfully:`, responseData);
+      console.log("Projet posté avec succès !");
+      const updatedWorks = await fetchWorks(); // Récupère les travaux mis à jour
+      displayWorksModal(updatedWorks); // Actualise l'affichage des travaux
     } else {
-      console.error("Failed to post work:", response.statusText);
+      console.error("Erreur lors de l'envoi :", response.statusText);
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Erreur:", error);
   }
 }
