@@ -66,17 +66,17 @@
 						<div class="modalProject">
 							<i class="fa-regular fa-image "></i>
 							<button>
-								<input type="file" name="imageFile" required>
+								<input type="file" id="fileInput" name="string($binary)" required>
 								<!-- PREVIEW -->
-								<img id="preview" style="display: none;"></img>
+								<img id="preview" class="preview"></img>
 								<p class="btn-text">+ Ajouter photo</p>
 							</button>
 							<p>jpg, png : 4mo max</p>
 						</div>
-						<input type="text" name="title">
+						<input type="text" name="string" id="titleInput">
 						<!-- TEST	 -->
 
-						<select id="categories" name="categoryId">
+						<select id="categories" name="integer($int64)">
 							<!-- METTRE PLUTOIT ID CATEGORIE -->
 							<option value="1">Objet</option>
 							<option value="2">Appartement</option>

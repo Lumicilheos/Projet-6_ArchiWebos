@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".js-modal-switch").addEventListener("click", function (event) {
     event.preventDefault();
     const modal = document.querySelector("#modal2");
-    modal.style.display = "block"; // Rendre la modal visible
+    modal.style.display = "flex"; // Rendre la modal visible
 
     // Attacher l'événement 'submit' au formulaire seulement une fois la modal visible
     const form = document.getElementById("newProject");
@@ -111,6 +111,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function postWork() {
   const form = document.getElementById("newProject");
+  const imageFile = document.querySelector("#fileInput").files[0];
+  const previewImage = document.querySelector("#preview");
+  const titleInput = document.querySelector("#titleInput");
+  const categories = await fetchCategories();
+  const categorySelect = document.querySelector("#categories");
+
+  // Preview
+  if (imageFile) {
+    previewImage.style.display = "block";
+    const imageUrl = URL.createObjectURL(imageFile);
+    previewImage.src = imageUrl;
+  }
 
   // Vérifier si le formulaire et les champs existent avant de les utiliser
   if (!form) {
@@ -118,22 +130,16 @@ async function postWork() {
     return;
   }
 
-  const formData = new FormData(form);
-  const imageFile = form.querySelector('input[type="file"]').files[0];
-  const titleInput = form.querySelector("input[type='text']");
-  const categorySelect = form.querySelector("select");
-
   // Vérification de la présence des éléments
   if (!imageFile || !titleInput || !categorySelect) {
     console.error("Tous les champs ne sont pas remplis.");
     return;
   }
 
-  formData.append("title", titleInput.value);
-  formData.append("imageUrl", imageFile);
-  formData.append("categoryId", categorySelect.value);
-  formData.append("userId", userId);
-  console.log(categorySelect.value);
+  categories.forEach((category) => {
+    const option = `<option value="${category.id}">${category.name}</option>`;
+    categorySelect.insertAdjacentHTML("beforeend", option);
+  });
 
   try {
     const response = await fetch(apiWorksUrl, {
@@ -141,7 +147,7 @@ async function postWork() {
       headers: {
         Authorization: `Bearer ${token}`, // Ajouter le token
       },
-      body: formData,
+      body: new FormData(form),
     });
 
     if (response.ok) {

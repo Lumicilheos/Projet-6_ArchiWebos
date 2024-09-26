@@ -462,3 +462,8 @@ section.login {
   z-index: 0;
   position: absolute;
 }
+
+.preview {
+  max-width: 100%;
+  height: auto;
+}
