@@ -465,5 +465,7 @@ section.login {
 
 .preview {
   max-width: 100%;
-  height: auto;
+  height: 100px;
+  object-fit: contain;
+  display: none;
 }

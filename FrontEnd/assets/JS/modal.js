@@ -10,8 +10,14 @@ const openModal = function (event, targetModal = null) {
   modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
 };
 
-const closeModal = function (event) {
+const closeModal = function (event = null) {
   if (modal === null) return;
+
+  // Vérifiez si l'événement est passé et appelez preventDefault seulement s'il existe
+  if (event && typeof event.preventDefault === "function") {
+    event.preventDefault();
+  }
+
   event.preventDefault();
   modal.style.display = "none";
   modal.removeEventListener("click", closeModal);
@@ -109,6 +115,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById("fileInput");
+
+  if (fileInput) {
+    fileInput.addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const previewImage = document.getElementById("preview");
+        previewImage.src = URL.createObjectURL(file);
+        previewImage.style.display = "block"; // Assurez-vous que l'image s'affiche
+        console.log(previewImage);
+      }
+    });
+  } else {
+    console.error("L'élément fileInput n'a pas été trouvé.");
+  }
+});
+
 async function postWork() {
   const form = document.getElementById("newProject");
   const imageFile = document.querySelector("#fileInput").files[0];
@@ -116,13 +140,17 @@ async function postWork() {
   const titleInput = document.querySelector("#titleInput");
   const categories = await fetchCategories();
   const categorySelect = document.querySelector("#categories");
+  const formData = new FormData();
+  formData.append("image", imageFile);
+  formData.append("title", titleInput.value);
+  formData.append("category", categorySelect.value);
 
   // Preview
-  if (imageFile) {
-    previewImage.style.display = "block";
-    const imageUrl = URL.createObjectURL(imageFile);
-    previewImage.src = imageUrl;
-  }
+  // if (imageFile) {
+  //   previewImage.style.display = "block";
+  //   const imageUrl = URL.createObjectURL(imageFile);
+  //   previewImage.src = imageUrl;
+  // }
 
   // Vérifier si le formulaire et les champs existent avant de les utiliser
   if (!form) {
@@ -147,13 +175,14 @@ async function postWork() {
       headers: {
         Authorization: `Bearer ${token}`, // Ajouter le token
       },
-      body: new FormData(form),
+      body: formData,
     });
 
     if (response.ok) {
       console.log("Projet posté avec succès !");
       const updatedWorks = await fetchWorks(); // Récupère les travaux mis à jour
       displayWorksModal(updatedWorks); // Actualise l'affichage des travaux
+      closeModal();
     } else {
       console.error("Erreur lors de l'envoi :", response.statusText);
     }
