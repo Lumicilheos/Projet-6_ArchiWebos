@@ -45,7 +45,8 @@
 			<div class="modal-title">
 				<h2>Mes Projets</h2>
 				<!-- TEST MODAL	 -->
-				<a href="#modal1" class="js-modal"> <i class="fa-regular fa-pen-to-square"></i> modifier</a>
+				<a href="#modal1" class="js-modal" style="display: none;"> <i class="fa-regular fa-pen-to-square"></i>
+					modifier</a>
 			</div>
 			<aside id="modal1" class="modal" style="display: none;">
 				<div class="modal-wrapper js-modal-stop">
@@ -62,26 +63,26 @@
 					<button class="js-modal-back"><i class="fa-solid fa-arrow-left"></i></button>
 					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
 					<h2>Ajout photo</h2>
-					<form id="newProject" enctype="multipart/form-data" method="post">
+					<form id="newProject" class="newProject" enctype="multipart/form-data">
 						<div class="modalProject">
-							<i class="fa-regular fa-image "></i>
-							<button>
+							<i class="fa-regular fa-image assideIcone"></i>
+							<img id="preview" class="preview" /> <!-- Cacher l'image par défaut -->
+							<button type="button"> <!-- Important: Ajoutez type="button" pour éviter l'envoi du formulaire -->
 								<input type="file" id="fileInput" name="string($binary)" required>
 								<!-- PREVIEW -->
-								<img id="preview" class="preview"></img>
 								<p class="btn-text">+ Ajouter photo</p>
 							</button>
-							<p>jpg, png : 4mo max</p>
+							<p class="assideText">jpg, png : 4mo max</p>
 						</div>
+						<p class="newProjectText">Titre</p>
 						<input type="text" name="string" id="titleInput">
-						<!-- TEST	 -->
+						<p class="newProjectText">Catégorie</p>
+						<select id="categories" class="selectProject" name="integer($int64)">
 
-						<select id="categories" name="integer($int64)">
-							<!-- METTRE PLUTOIT ID CATEGORIE -->
-							<option value="1">Objet</option>
-							<option value="2">Appartement</option>
-							<option value="3">Hotel & restaurants</option>
 						</select>
+						<div class="ligne">
+							<hr>
+						</div>
 						<input type="submit" value="Valider" id="submitProject">
 					</form>
 
@@ -95,7 +96,7 @@
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
-			<form action="#" method="post">
+			<form method="post">
 				<label for="name">Nom</label>
 				<input type="text" name="name" id="name">
 				<label for="email">Email</label>

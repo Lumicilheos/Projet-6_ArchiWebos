@@ -354,6 +354,9 @@ section.login {
 .js-modal {
   color: black;
   text-decoration: none;
+  font-size: 22px;
+  background-color: white;
+  border: none;
 }
 
 .js-modal i {
@@ -383,8 +386,7 @@ section.login {
   flex-direction: column;
 }
 
-.js-modal-close,
-.js-modal-back {
+.js-modal-close {
   align-self: end;
   /* position: relative;
   left: 55px;
@@ -398,6 +400,9 @@ section.login {
   align-self: start;
   position: relative;
   top: 30px;
+  font-size: 22px;
+  background-color: white;
+  border: none;
   /* VERIFIER la position */
 }
 
@@ -435,6 +440,22 @@ section.login {
   width: 420px;
 }
 
+.newProject {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  align-self: center;
+}
+
+.newProjectText {
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+.selectProject {
+  height: 37px;
+}
+
 .modalProject i {
   font-size: 70px;
   color: #b9c5cc;
@@ -464,8 +485,20 @@ section.login {
 }
 
 .preview {
-  max-width: 100%;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: none;
+  margin: 0 auto;
+}
+
+.modalProject > button {
+  margin-top: 5px;
+  border-radius: 25px;
+  color: #306685;
+  font-size: 14px;
+}
+.ligne {
+  height: 10px; /* Épaisseur de la ligne */
+  margin: 20px 0; /* Espacement autour de la ligne */
 }

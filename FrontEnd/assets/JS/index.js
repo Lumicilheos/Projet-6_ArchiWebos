@@ -1,7 +1,6 @@
 // URL de l'API
 const apiCategoriesUrl = "http://localhost:5678/api/categories";
 const apiWorksUrl = "http://localhost:5678/api/works";
-const apiWorkDelete = "http://localhost:5678/api/works/${workId}";
 const apiworkpost = "http://localhost:5678/api/users/login";
 
 const token = localStorage.getItem("token");
@@ -11,13 +10,24 @@ const userId = localStorage.getItem("userId");
 
 // AVOIR
 
-// document.getElementById("projet").addEventListener("click", function () {
-//   window.location.href = "index.html";
-// });
-
 document.getElementById("loginButton").addEventListener("click", function () {
   window.location.href = "login.html";
 });
+
+// BTN ADMIN
+
+if (token) {
+  let adminLog = document.getElementsByClassName("js-modal");
+  for (let i = 0; i < adminLog.length; i++) {
+    if (adminLog[i]) {
+      adminLog[i].style.display = "block";
+    }
+  }
+}
+
+// document.getElementById("loginButton").addEventListener("click", function () {
+//   window.location.href = "login.html";
+// });
 
 // RECUPERATION
 
